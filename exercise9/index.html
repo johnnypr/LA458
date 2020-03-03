@@ -93,6 +93,10 @@
 
 <script>
 
+var stamenURL = 'http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}';
+var stamenAttrib = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+       
+
 var map = L.map('map').setView([37.8, -96], 4);
 
 
@@ -182,12 +186,20 @@ L.geoJson(states).addTo(map);
         }).addTo(map);
 		}
 });
+	var stamenMap = L.tileLayer(stamenURL, {
+    attribution: stamenAttrib,
+    subdomains: 'abcd',
+    minZoom: 0,
+    maxZoom: 20,
+    ext: 'png'
+});
 
 
 
 var baseLayers = {
   "geojson": geojson,
-  "cities": cities
+  "cities": cities,
+  "stamenMap": stamenMap
 };
 L.control.layers(null,baseLayers).addTo(map);
 
